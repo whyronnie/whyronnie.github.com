@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>why-ui</title>
+	<link rel="stylesheet" href="css/whyui.css">
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="select">
+		<!-- <div class="why-select">
+			<span class="why-select-content"><span class="why-select-text">111</span><span class="why-select-icon"><i class="fa fa-angle-down"></i></span></span>
+			<div class="why-option-group">
+				<div class="why-option">北京市</div>
+				<div class="why-option">上海市</div>
+			</div>
+		</div> -->
+		<select name="" id="aaa">
+			<option value="1">北京</option>
+			<option value="2">上海</option>
+			<option value="3">广州</option>
+			<option value="4">深圳</option>
+		</select>
+	</div>
+	<script src="jquery.min.js"></script>
+	<script src="whyui.js"></script>
+	<script src="whyselect/whyselect.js"></script>
+	<script>
+		var s = new WhySelect({
+			id: "aaa"
+		})
+	</script>
+</body>
+</html>
