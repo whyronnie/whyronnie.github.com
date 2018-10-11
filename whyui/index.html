@@ -19,6 +19,12 @@
 		.input input,textarea{
 			vertical-align: top;
 		}
+		.radio span{
+			margin-right: 3px;
+		}
+		.check span{
+			margin-right: 3px;
+		}
 	</style>
 </head>
 <body>
@@ -39,9 +45,10 @@
 		</div>
 		<div class="radio">
 			<div class="title">Radio 单选框</div>
-			<span><input type="radio" class="why-radio" name="111" label="红"></span>
-			<span><input type="radio" class="why-radio" name="111" label="黄"></span>
-			<span><input type="radio" class="why-radio" name="111" label="蓝"></span>
+			<span><input type="radio" class="why-radio" name="111" label="北京"></span>
+			<span><input type="radio" class="why-radio" name="111" label="上海"></span>
+			<span><input type="radio" class="why-radio" name="111" label="广州"></span>
+			<span><input type="radio" class="why-radio" name="111" label="深圳"></span>
 		</div>
 		<div class="radiobtn">
 			<div class="title">RadioBtn 按钮样式单选组合</div>
@@ -66,7 +73,10 @@
 		</div>
 		<div class="check">
 			<div class="title">checkbox 复选框</div>
-			<span><input type="checkbox" class="why-checkbox" name="111" label="备选项"></span>
+			<span><input type="checkbox" class="why-checkbox" name="111" label="北京"></span>
+			<span><input type="checkbox" class="why-checkbox" name="111" label="上海"></span>
+			<span><input type="checkbox" class="why-checkbox" name="111" label="广州"></span>
+			<span><input type="checkbox" class="why-checkbox" name="111" label="深圳"></span>
 		</div>
 		<div class="input">
 			<div class="title">input 输入框</div>
@@ -83,8 +93,7 @@
 			</select>
 		</div>
 	</div>
-	<script src="jquery.min.js"></script>
-	<script src="js/whyui.js"></script>
+	<script src="whyui.js"></script>
 	<script src="whyselect/whyselect.js"></script>
 	<script>
 		var s = new WhySelect({
