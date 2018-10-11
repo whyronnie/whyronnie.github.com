@@ -1,3 +1,2 @@
-# whyronnie.github.com
-My resume<br>
+# My resume
 个人主页
