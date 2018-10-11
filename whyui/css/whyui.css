@@ -207,31 +207,7 @@ input[type="radio"],input[type="checkbox"]{
 .why-input:focus{
 	border-color: var(--whyblack);
 }
-.why-input-s{
-	position: relative;
-}
-.why-input-1{
-	position: absolute;
-	display: inline-block;
-	top: 0;
-	left: 10px;
-}
-.why-input-1 .fa,.why-input-3 .fa{
-	color: var(--whygray);
-	font-size: 14px;
-}
-.why-input-2 input{
-	padding-left: 30px;
-}
-.why-input-3{
-	position: absolute;
-	display: inline-block;
-	right: 15px;
-	top: 0;
-}
-.why-input-4 input{
-	padding-right: 30px;
-}
+
 .why-textarea{
 	border-radius: 4px;
 	border: 1px solid var(--whygray);
@@ -249,31 +225,6 @@ input[type="radio"],input[type="checkbox"]{
 }
 .why-textarea::-webkit-input-placeholder{
 	color: var(--whygray);
-}
-.slot{
-	display: inline-block;
-	border: 1px solid var(--whygray);
-	display: inline-block;
-	padding: 0 15px;
-	font-size: 14px;
-	height: 36px;
-	line-height: 36px;
-	background-color: #eee;
-	color: var(--whyblack);
-}
-.preslot{
-	border-radius: 5px 0 0 5px;
-	border-right: none;
-}
-.why-pretpl-input{
-	border-radius: 0 5px 5px 0;
-}
-.sufslot{
-	border-radius: 0 5px 5px 0;
-	border-left: none;
-}
-.why-suftpl-input{
-	border-radius: 5px 0 0 5px;
 }
 
 
