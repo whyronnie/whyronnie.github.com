@@ -92,13 +92,43 @@
 				<option value="4">深圳</option>
 			</select>
 		</div>
+		<div class="alert">
+			<div class="title">Message 弹框</div>
+			<button class="why-btn" onclick="whyalert()">点击弹框</button>
+			<button class="why-btn" onclick="whyconfirm()">点击弹出确认框</button>
+		</div>
+		<div class="why-shadow">
+			<div class="why-msg">
+				<div class="why-shadow-title">标题<span class="why-shadow-close"></span></div>
+				<div class="why-shadow-content">内容</div>
+				<div class="why-shadow-btns">
+					<button class="why-btn why-btn-small why-btn-info">取消</button>
+					<button class="why-btn why-btn-small why-btn-success">确定</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="whyui.js"></script>
 	<script src="whyselect/whyselect.js"></script>
 	<script>
 		var s = new WhySelect({
 			id: "aaa"
-		})
+		});
+		function whyalert(){
+			why.alert("这是一个弹框消息","提示",{confirmText: "好的"});
+		}
+		function whyconfirm(){
+			why.confirm("您确定割包皮吗？","提示",{
+				confirmText: "好的",
+				cancelText: "别逗",
+				cancel: function(){
+					alert("步子迈大了容易扯着蛋");
+				},
+				confirm: function(){
+					alert("割了有多好，谁割谁知道");
+				}
+			})
+		}
 	</script>
 </body>
 </html>

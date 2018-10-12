@@ -1,4 +1,4 @@
-;(function(undefined){
+;(function(window,undefined){
 	document.onselectstart=function(){return false;};
 
 	//radio 初始化
@@ -96,6 +96,131 @@
 		}(k5)
 	}
 
-	//input 初始化
-	var inputs = document
-}());
+	//message 弹框
+	var WhyMessage = function(){
+		this._initial();
+	};
+	WhyMessage.prototype = {
+		constructor: this,
+		_initial: function(){
+			var _this = this;
+			this.whyshadow = document.createElement("div");
+			this.whyshadow.classList.add("why-shadow");
+
+			this.whymsg = document.createElement("div");
+			this.whymsg.classList.add("why-msg");
+
+			this.whytitle = document.createElement("div");
+			this.whytitle.classList.add("why-shadow-title");
+			
+			this.whyclose = document.createElement("span");
+			this.whyclose.classList.add("why-shadow-close");
+
+			this.whyclose.onclick = function(){
+				_this._hide();
+			}
+
+			this.whycontent = document.createElement("div");
+			this.whycontent.classList.add("why-shadow-content");
+			
+			this.whybtns = document.createElement("div");
+			this.whybtns.classList.add("why-shadow-btns");
+		},
+		_show: function(){
+			document.body.appendChild(this.whyshadow);
+			this.whyshadow.style.animation = "whyshadow_ani_in 0.5s forwards";
+			this.whymsg.style.animation = "whymsg_ani_in 0.5s forwards";
+			this.whyshadow.style.display = "block";
+		},
+		_hide: function(){
+			var _this = this;
+			this.whyshadow.style.animation = "whyshadow_ani_out 0.5s forwards";
+			this.whymsg.style.animation = "whymsg_ani_out 0.5s forwards";
+			setTimeout(function(){
+				_this.whyshadow.style.display = "none";
+				document.body.removeChild(_this.whyshadow);
+			}, 500);
+		},
+		alert: function(content,title,opt){
+			var _this = this;
+			var def = {
+				confirmText: "确定",
+				confirm: function(){},
+			}
+			def = extend(def,opt,true);
+
+			this.whytitle.innerHTML = title;
+			this.whytitle.appendChild(this.whyclose);
+			this.whymsg.appendChild(this.whytitle);
+			this.whycontent.innerHTML = content;
+			this.whymsg.appendChild(this.whycontent);
+
+			this.whybtns.innerHTML = "";
+			var confirmbtn = document.createElement("button");
+			confirmbtn.className = "why-btn why-btn-small why-btn-success";
+			confirmbtn.innerHTML = def.confirmText;
+			confirmbtn.onclick = function(){
+				def.confirm();
+				_this._hide();
+			};
+			this.whybtns.appendChild(confirmbtn);
+
+			this.whymsg.appendChild(this.whybtns);
+
+			this.whyshadow.appendChild(this.whymsg);
+			this._show();
+		},
+		confirm: function(content,title,opt){
+			var _this = this;
+			var def = {
+				confirmText: "确定",
+				cancelText: "取消",
+				confirm: function(){},
+				cancel: function(){}
+			}
+			def = extend(def,opt,true);
+
+			this.whytitle.innerHTML = title;
+			this.whytitle.appendChild(this.whyclose);
+			this.whymsg.appendChild(this.whytitle);
+			this.whycontent.innerHTML = content;
+			this.whymsg.appendChild(this.whycontent);
+
+			this.whybtns.innerHTML = "";
+
+			var cancelbtn = document.createElement("button");
+			cancelbtn.className = "why-btn why-btn-small why-btn-info";
+			cancelbtn.innerHTML = def.cancelText;
+			cancelbtn.onclick = function(){
+				def.cancel();
+				_this._hide();
+			}
+			this.whybtns.appendChild(cancelbtn);
+
+			var confirmbtn = document.createElement("button");
+			confirmbtn.className = "why-btn why-btn-small why-btn-success";
+			confirmbtn.innerHTML = def.confirmText;
+			confirmbtn.onclick = function(){
+				def.confirm();
+				_this._hide();
+			};
+			this.whybtns.appendChild(confirmbtn);
+
+			this.whymsg.appendChild(this.whybtns);
+
+			this.whyshadow.appendChild(this.whymsg);
+			this._show();
+		}
+	}
+
+	function extend(o,n,override){
+		for(var key in n){
+	        if(n.hasOwnProperty(key) && (!o.hasOwnProperty(key) || override)){
+	            o[key]=n[key];
+	        }
+	    }
+	    return o;
+	}
+
+	window.why = new WhyMessage();
+}(window));
