@@ -97,18 +97,16 @@
 	}
 
 	//message 弹框
-	var WhyMessage = function(){
-		this._initial();
-	};
+	var WhyMessage = function(){};
 	WhyMessage.prototype = {
 		constructor: this,
-		_initial: function(){
+		_msgbox_initial: function(){
 			var _this = this;
 			this.whyshadow = document.createElement("div");
 			this.whyshadow.classList.add("why-shadow");
 
-			this.whymsg = document.createElement("div");
-			this.whymsg.classList.add("why-msg");
+			this.whymsgbox = document.createElement("div");
+			this.whymsgbox.classList.add("why-msgbox");
 
 			this.whytitle = document.createElement("div");
 			this.whytitle.classList.add("why-shadow-title");
@@ -117,7 +115,7 @@
 			this.whyclose.classList.add("why-shadow-close");
 
 			this.whyclose.onclick = function(){
-				_this._hide();
+				_this.close(_this);
 			}
 
 			this.whycontent = document.createElement("div");
@@ -129,19 +127,20 @@
 		_show: function(){
 			document.body.appendChild(this.whyshadow);
 			this.whyshadow.style.animation = "whyshadow_ani_in 0.5s forwards";
-			this.whymsg.style.animation = "whymsg_ani_in 0.5s forwards";
+			this.whymsgbox.style.animation = "whymsgbox_ani_in 0.5s forwards";
 			this.whyshadow.style.display = "block";
 		},
-		_hide: function(){
+		close: function(){
 			var _this = this;
 			this.whyshadow.style.animation = "whyshadow_ani_out 0.5s forwards";
-			this.whymsg.style.animation = "whymsg_ani_out 0.5s forwards";
+			this.whymsgbox.style.animation = "whymsgbox_ani_out 0.5s forwards";
 			setTimeout(function(){
 				_this.whyshadow.style.display = "none";
 				document.body.removeChild(_this.whyshadow);
 			}, 500);
 		},
 		alert: function(content,title,opt){
+			this._msgbox_initial();
 			var _this = this;
 			var def = {
 				confirmText: "确定",
@@ -151,9 +150,9 @@
 
 			this.whytitle.innerHTML = title;
 			this.whytitle.appendChild(this.whyclose);
-			this.whymsg.appendChild(this.whytitle);
+			this.whymsgbox.appendChild(this.whytitle);
 			this.whycontent.innerHTML = content;
-			this.whymsg.appendChild(this.whycontent);
+			this.whymsgbox.appendChild(this.whycontent);
 
 			this.whybtns.innerHTML = "";
 			var confirmbtn = document.createElement("button");
@@ -161,16 +160,17 @@
 			confirmbtn.innerHTML = def.confirmText;
 			confirmbtn.onclick = function(){
 				def.confirm();
-				_this._hide();
+				_this.close(_this);
 			};
 			this.whybtns.appendChild(confirmbtn);
 
-			this.whymsg.appendChild(this.whybtns);
+			this.whymsgbox.appendChild(this.whybtns);
 
-			this.whyshadow.appendChild(this.whymsg);
+			this.whyshadow.appendChild(this.whymsgbox);
 			this._show();
 		},
 		confirm: function(content,title,opt){
+			this._msgbox_initial();
 			var _this = this;
 			var def = {
 				confirmText: "确定",
@@ -180,11 +180,11 @@
 			}
 			def = extend(def,opt,true);
 
-			this.whytitle.innerHTML = title;
+			this.whytitle.innerHTML = title?title:"提示";
 			this.whytitle.appendChild(this.whyclose);
-			this.whymsg.appendChild(this.whytitle);
-			this.whycontent.innerHTML = content;
-			this.whymsg.appendChild(this.whycontent);
+			this.whymsgbox.appendChild(this.whytitle);
+			this.whycontent.innerHTML = content?content:"";
+			this.whymsgbox.appendChild(this.whycontent);
 
 			this.whybtns.innerHTML = "";
 
@@ -193,7 +193,7 @@
 			cancelbtn.innerHTML = def.cancelText;
 			cancelbtn.onclick = function(){
 				def.cancel();
-				_this._hide();
+				_this.close(_this);
 			}
 			this.whybtns.appendChild(cancelbtn);
 
@@ -202,14 +202,83 @@
 			confirmbtn.innerHTML = def.confirmText;
 			confirmbtn.onclick = function(){
 				def.confirm();
-				_this._hide();
+				_this.close(_this);
 			};
 			this.whybtns.appendChild(confirmbtn);
 
-			this.whymsg.appendChild(this.whybtns);
+			this.whymsgbox.appendChild(this.whybtns);
 
-			this.whyshadow.appendChild(this.whymsg);
+			this.whyshadow.appendChild(this.whymsgbox);
 			this._show();
+		},
+		opendialog: function(content,title,opt){
+			this._msgbox_initial();
+			var _this = this;
+			var def = {
+				btns: [],
+			}
+			def = extend(def,opt,true);
+
+			this.whytitle.innerHTML = title?title:"提示";
+			this.whytitle.appendChild(this.whyclose);
+			this.whymsgbox.appendChild(this.whytitle);
+			this.whycontent.innerHTML = content?content:"";
+			this.whymsgbox.appendChild(this.whycontent);
+
+			this.whybtns.innerHTML = "";
+
+			var newbtns = new Array(def.btns.length);
+
+			for(var i = 0;i < def.btns.length;i++){
+				newbtns[i] = document.createElement("button");
+				newbtns[i].className = def.btns[i].class;
+				newbtns[i].innerHTML = def.btns[i].text;
+				newbtns[i].onclick = function(index){
+					return function(){
+						def.btns[index].click(_this);
+					}
+				}(i)
+				this.whybtns.appendChild(newbtns[i]);
+			}
+
+			this.whymsgbox.appendChild(this.whybtns);
+
+			this.whyshadow.appendChild(this.whymsgbox);
+			this._show();
+		},
+		msg: function(content,opt){
+			var whymsg = document.createElement("div");
+			whymsg.classList.add("why-msg");
+			var def = {
+				type: "info"
+			}
+			def = extend(def,opt,true);
+			var types = {
+				"success":["why-msg-success","fa-check-circle"],
+				"error": ["why-msg-error","fa-times-circle"],
+				"warning": ["why-msg-warning","fa-info-circle"]
+			}
+			if(def.type === "info"){
+				whymsg.innerHTML = content;
+			} else {
+				whymsg.innerHTML = '<i class="fa '+types[def.type][1]+'"></i> ' + content;
+				whymsg.classList.add(types[def.type][0]);
+			}
+
+			document.body.appendChild(whymsg);
+			whymsg.style.animation = "whymsg_ani_in 0.5s forwards";
+			whymsg.style.display = "block";
+
+			setTimeout(function(){
+				whymsg.style.animation = "whymsg_ani_out 0.5s forwards";
+				setTimeout(function(){
+					whymsg.style.display = "none";
+					document.body.removeChild(whymsg);
+				},500);
+			},3500);
+		},
+		find: function(id){
+			return document.getElementById(id);
 		}
 	}
 

@@ -215,7 +215,7 @@ input[type="radio"],input[type="checkbox"]{
 
 /*input*/
 .why-input{
-	padding: 0 15px;
+	padding: 0 12px;
 	height: 38px;
 	line-height: 38px;
 	display: inline-block;
@@ -248,6 +248,18 @@ input[type="radio"],input[type="checkbox"]{
 .why-input:focus{
 	border-color: #474644;
 	border-color: var(--whyblack);
+}
+.why-input-large{
+	padding: 0 15px;
+	height: 45px;
+	line-height: 45px;
+	font-size: 16px;
+}
+.why-input-small{
+	padding: 0 10px;
+	height: 33px;
+	line-height: 33px;
+	font-size: 12px;
 }
 
 .why-textarea{
@@ -403,7 +415,7 @@ input[type="radio"],input[type="checkbox"]{
 	to{bottom: 40px;opacity: 0}
 }
 
-/*message 弹框*/
+/*messagebox 弹框*/
 .why-shadow{
 	display: none;
 	position: fixed;
@@ -412,7 +424,7 @@ input[type="radio"],input[type="checkbox"]{
 	bottom: 0;
 	right: 0;
 }
-.why-msg{
+.why-msgbox{
 	position: absolute;
 	width: 400px;
 	margin: auto;
@@ -464,11 +476,39 @@ input[type="radio"],input[type="checkbox"]{
 	transform: rotate(45deg);
 }
 
-@keyframes whymsg_ani_in{
+/*message 提示*/
+.why-msg{
+	display: none;
+	position: fixed;
+	width: 400px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	padding: 10px 20px;
+	border-radius: 5px;
+	top: 30px;
+	background: rgba(47,46,44,.7);
+	color: #fff;
+	font-size: 14px;
+}
+.why-msg-success{
+	color: #67C23A;
+	color: var(--whysuccess);
+}
+.why-msg-error{
+	color: #F56C6C;
+	color: var(--whydanger);
+}
+.why-msg-warning{
+	color: #E6A23C;
+	color: var(--whywarning);
+}
+
+@keyframes whymsgbox_ani_in{
 	from{top: 33vh;opacity: 0}
 	to{top: 35vh;opacity: 1}
 }
-@keyframes whymsg_ani_out{
+@keyframes whymsgbox_ani_out{
 	from{top: 35vh;opacity: 1}
 	to{top: 33vh;opacity: 0}
 }
@@ -480,4 +520,13 @@ input[type="radio"],input[type="checkbox"]{
 @keyframes whyshadow_ani_out{
 	from{background: rgba(0,0,0,.3);}
 	to{background: rgba(0,0,0,0);}
+}
+
+@keyframes whymsg_ani_in{
+	from{top: -50px;opacity: 0;}
+	to{top: 30px;opacity: 1;}
+}
+@keyframes whymsg_ani_out{
+	from{top: 30px;opacity: 1;}
+	to{top: -50px;opacity: 0;}
 }

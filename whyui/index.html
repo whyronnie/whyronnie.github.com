@@ -80,7 +80,9 @@
 		</div>
 		<div class="input">
 			<div class="title">input 输入框</div>
-			<input type="text" class="why-input" placeholder="请输入">
+			<input type="text" class="why-input why-input-large" placeholder="normal"><br><br>
+			<input type="text" class="why-input" placeholder="normal"><br><br>
+			<input type="text" class="why-input why-input-small" placeholder="small"><br><br>
 			<textarea name="" id="" class="why-textarea" cols="30" rows="5" placeholder="请输入"></textarea>
 		</div>
 		<div class="select">
@@ -92,20 +94,21 @@
 				<option value="4">深圳</option>
 			</select>
 		</div>
-		<div class="alert">
-			<div class="title">Message 弹框</div>
-			<button class="why-btn" onclick="whyalert()">点击弹框</button>
-			<button class="why-btn" onclick="whyconfirm()">点击弹出确认框</button>
+		<div class="messagebox">
+			<div class="title">MessageBox 弹框</div>
+			<button class="why-btn why-btn-info" onclick="whyalert()">点击弹框</button>
+			<button class="why-btn why-btn-info" onclick="whyconfirm()">点击弹出确认框</button>
+			<button class="why-btn why-btn-info" onclick="whysubmit()">点击提交内容</button>
 		</div>
-		<div class="why-shadow">
-			<div class="why-msg">
-				<div class="why-shadow-title">标题<span class="why-shadow-close"></span></div>
-				<div class="why-shadow-content">内容</div>
-				<div class="why-shadow-btns">
-					<button class="why-btn why-btn-small why-btn-info">取消</button>
-					<button class="why-btn why-btn-small why-btn-success">确定</button>
-				</div>
-			</div>
+		<div class="message">
+			<div class="title">Message 提示</div>
+			<button class="why-btn why-btn-info" onclick="whymsginfo()">默认</button>
+			<button class="why-btn why-btn-success" onclick="whymsgsuccess()">成功</button>
+			<button class="why-btn why-btn-danger" onclick="whymsgerror()">失败</button>
+			<button class="why-btn why-btn-warning" onclick="whymsgwarning()">警告</button>
+		</div>
+		<div class="why-msg why-msg-success">
+			333
 		</div>
 	</div>
 	<script src="whyui.js"></script>
@@ -127,7 +130,39 @@
 				confirm: function(){
 					alert("割了有多好，谁割谁知道");
 				}
-			})
+			});
+		}
+		function whysubmit(){
+			why.opendialog('<input type="text" id="bbb" class="why-input" placeholder="请输入" style="width:100%;">',"提示",{
+				btns: [{
+					text: "取消",
+					class: "why-btn why-btn-small why-btn-info",
+					click: function(whydom){
+						alert("您点击了取消");
+						why.close();
+					}
+				},{
+					text: "提交",
+					class: "why-btn why-btn-small why-btn-success",
+					click: function(whydom){
+						var v = whydom.find("bbb").value;
+						alert("您输入了："+v);
+						why.close();
+					}
+				}]
+			});
+		}
+		function whymsginfo(){
+			why.msg("这是一条普通消息");
+		}
+		function whymsgsuccess(){
+			why.msg("这是一条成功消息",{type:"success"});
+		}
+		function whymsgerror(){
+			why.msg("这是一条错误消息",{type:"error"});
+		}
+		function whymsgwarning(){
+			why.msg("这是一条警告消息",{type:"warning"});
 		}
 	</script>
 </body>
