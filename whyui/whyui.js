@@ -215,7 +215,7 @@
 			this._msgbox_initial();
 			var _this = this;
 			var def = {
-				btns: [],
+				btns: []
 			}
 			def = extend(def,opt,true);
 
@@ -250,7 +250,8 @@
 			var whymsg = document.createElement("div");
 			whymsg.classList.add("why-msg");
 			var def = {
-				type: "info"
+				type: "info",
+				time: 3000
 			}
 			def = extend(def,opt,true);
 			var types = {
@@ -275,7 +276,7 @@
 					whymsg.style.display = "none";
 					document.body.removeChild(whymsg);
 				},500);
-			},3500);
+			},500 + def.time);
 		},
 		find: function(id){
 			return document.getElementById(id);

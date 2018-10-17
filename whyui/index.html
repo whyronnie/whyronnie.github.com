@@ -107,9 +107,6 @@
 			<button class="why-btn why-btn-danger" onclick="whymsgerror()">失败</button>
 			<button class="why-btn why-btn-warning" onclick="whymsgwarning()">警告</button>
 		</div>
-		<div class="why-msg why-msg-success">
-			333
-		</div>
 	</div>
 	<script src="whyui.js"></script>
 	<script src="whyselect/whyselect.js"></script>
@@ -156,7 +153,7 @@
 			why.msg("这是一条普通消息");
 		}
 		function whymsgsuccess(){
-			why.msg("这是一条成功消息",{type:"success"});
+			why.msg("这是一条成功消息",{type:"success",time: 1000});
 		}
 		function whymsgerror(){
 			why.msg("这是一条错误消息",{type:"error"});
